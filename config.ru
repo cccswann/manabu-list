@@ -1,3 +1,10 @@
 require_relative './config/environment'
 
-run ApplicationController 
+if ActiveRecord::Base.connection.migration_context.needs_migration?
+    raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.'
+end
+
+use UsersController
+use CourseController
+run ApplicationController
+ 
