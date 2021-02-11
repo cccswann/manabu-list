@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+body {
+    font-weight: 500;
+    margin: 0px;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    background: #f8f8fa;
+    align-items: center;
+    -webkit-align-items: center;
+}
+
 .input-box {
     font-weight: 300;
     font-size: 30px;
@@ -24,16 +39,22 @@ input[type=text], input[type=password], input[type=email] {
     background: white;
     border: solid 1px #d8e1eb;
     border-radius: 2rem;
-    text-align: left;
+    text-align: center;
     box-shadow: 0 1px 2px rgba(105, 105, 105, 0.12), 0 1px 3px rgba(128, 128, 128, 0.24);
   }
+
+textarea:focus, input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
+    outline:none;
+}
 
 .form-container {
     padding: 50px;
     background-color: #fefefe;
-    margin: 5px auto; /* 15% from the top and centered */
-    border: 1px solid rgb(194, 194, 194);
-    width: 30%; /* Could be more or less, depending on screen size */
+    margin: 100px auto; /* 25% from the top and centered */
+    border: 1px solid rgb(230, 230, 230);
+    width: 35%; /* Could be more or less, depending on screen size */
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     border-radius: 1.25rem;
 }
@@ -50,12 +71,27 @@ input[type=text], input[type=password], input[type=email] {
     cursor: pointer;
     width: 100%;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    transition: all 0.3s cubic-bezier(.25,.25,.25,1);
     background-image: linear-gradient(to right, #7474BF 0%, #348AC7 51%, #7474BF 100%)
 }
 
 .btn:hover {
-    box-shadow: 0 10px 15px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    margin: 8px;
-    background-position: left;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    margin: 8px 10px 12px;
+    background-position:right center;
+}
+
+.btn:active {
+    transform: translateY(4px);
+    background-image: linear-gradient(to right, #7474BF 0%, #348AC7 51%, #7474BF 100%);
+    outline: none;
+}
+
+img.logo {
+    width: 100px;
+}
+
+.center {
+    display: block;
+    margin: auto;
 }
