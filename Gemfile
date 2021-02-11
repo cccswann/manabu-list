@@ -10,10 +10,11 @@ gem 'bcrypt'
 gem 'bootstrap', '~> 5.0.0.beta1'
 gem 'sinatra-flash'
 gem 'open-uri'
+gem 'dotenv'
 
 group :development do
-    gem 'pry'
     gem 'shotgun'
+    gem 'pry'
     gem 'sqlite3', '~> 1.3.6'
     gem 'tux'
 end
