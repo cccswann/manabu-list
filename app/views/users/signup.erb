@@ -1,0 +1,24 @@
+
+<div class="form-container">
+    <div class="intro">
+        <img class="logo center" src="images/logo.png">
+        <h1> Welcome to Manabu List!</h1>
+        <p> Please sign up below for your free account</p>
+    </div>
+    <form action="/signup" method="post">
+        <div class="form-group">
+            <input class="input-box" type="text" placeholder="Username" name="user[username]" id="username" required>
+        </div>
+        <div class="form-group">
+            <input class="input-box" type="email" placeholder="Email Address" name="user[email]" id="email" required>
+        </div>
+        <div class="form-group">
+            <input class="input-box" type="password" placeholder="Password" name="user[password]" id="password" required>
+        </div>
+        <div class="form-group">
+            <input class="input-box" type="password" placeholder="Password Confirmation" name="user[password_confirmation]" id="password-confirmation" required>
+        </div>
+            <input class="btn center" type="submit" value="Sign-Up">
+    </form>
+</div>
+
