@@ -1,0 +1,24 @@
+
+<div class="form-container">
+
+<div class="intro">
+    <img class="logo center" src="images/logo.png">
+    <h1> Welcome!</h1>
+    <p> Please log in below:</p>
+</div>
+<form action="/login" method="post">
+    <div class="form-group">
+        <input class="input-box" type="email" placeholder="Email Address" name="user[email]" id="email" required>
+    </div>
+    <div class="form-group">
+        <input class="input-box" type="password" placeholder="Password" name="user[password]" id="password" required>
+    </div>
+    <% if flash[:error] %>
+    <div class="center">
+        <h3 class="error"><%= flash[:error] %></h3>
+    </div>
+    <% end %>
+        <input class="btn center" type="submit" value="Log In">
+</form>
+
+</div>
