@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
     get '/login' do
         if logged_in?
-            erb :"users/dashboard"
+            erb :"/users/dashboard"
         else
             erb :"/sessions/login"
         end
@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
         if user && user.authenticate(params["user"]["password"])
             session["user_id"] = user.id
             flash[:success] = "Successfully logged in!"
-            redirect "/courses"
+            erb :"/users/dashboard"
         else
             flash[:error] = "Invalid credentials"
             redirect "/login"
