@@ -1,0 +1,32 @@
+<div class="form-container edit">
+    <h3>Edit Your Courses</h3>
+    <br>
+    <form class="form-stretch" action="/course" method="POST" id="update-links-form">
+        <input type="hidden" name="_method" value="patch">
+            <% Course.all.each_with_index do |course, index| %>
+                <div class="edit-row">
+                    <div class="row-item-counter">
+                       <p><%= index + 1 %>.</p>
+                    </div>
+                    <div class="row-item-1"><%= course.course_name %></a></div>
+                    <div class="row-item-2">
+                        <input type="hidden" name="course[original_course][id][]" value="<%= course.id %>">
+                        <input class="input-box edit" type="text" id="<%= course.id %>" name="course[course_name][]" value="<%= course.course_name %>">
+                    </div>
+                    <div class="row-item-3"><input class="input-box edit" type="text" name="course[subject][]" value="<%= course.subject %>"></div>
+                    <div class="row-item-4"><input class="input-box edit" type="text" name="course[status][]" value="<%= course.status %>"></div>
+                    <div class="row-item-5"><input class="input-box edit" type="number" name="course[completed_lectures][]" value="<%= course.completed_lectures %>"></div>
+                    <div class="row-item-6"><input class="input-box edit" type="number" name="course[total_lectures][]" value="<%= course.total_lectures %>"></div>
+                    <div class="row-item-7">
+                        <div class="flex">
+                            <button class="flex btn delete-chk ">Delete<input class="checkbox" type="checkbox" name="course[check][]" value="<%= course.id %>"></button>
+                        </div> 
+                    </div>
+                    </div>
+            <% end %>
+    </form>
+    <br>
+    <div class="form-stretch">
+        <button class="btn" type="submit" form="update-links-form">Save Changes</button>
+    </div>
+</div>
