@@ -19,4 +19,15 @@ class UsersController < ApplicationController
             redirect '/signup'
         end
     end
+
+    get '/dashboard' do
+        if logged_in?
+            @user = current_user
+            erb :"/users/dashboard"
+        else
+            redirect '/login'
+        end
+    end
+
+
 end
