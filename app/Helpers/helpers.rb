@@ -5,7 +5,7 @@ module Helpers
     end
 
     def current_user
-        @current_user ||= User.find(session[:user_id]) if session[user_id]
+        User.find(session[:user_id])
     end
 
     def not_the_owner?(obj)
@@ -13,6 +13,10 @@ module Helpers
             flash[:error] = "You do not have permission for that page."
             erb :"/users/dashboard"
         end
+    end
+
+    def percent_complete(completed, total)
+        p ((completed.to_f/total.to_f) * 100).round
     end
 
 end
