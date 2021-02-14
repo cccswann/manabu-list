@@ -1,0 +1,24 @@
+<div class="form-container left">
+    <h3> Courses</h3>
+    <hr class="solid">
+    <table class="styled-table">
+        <thead>
+            <th>Name</th>
+            <th>Subject</th>
+            <th>Status</th>
+            <th>Completed Lectures</th>
+            <th>Total Lectures</th>
+        </thead>
+        <tbody>
+            <% Course.all.each do |a|%>
+                <tr>
+                    <td><%= a.course_name %></td> 
+                    <td><%= a.subject %></td> 
+                    <td><%= a.status %></td> 
+                    <td><%= a.completed_lectures %></td>
+                    <td><%= a.total_lectures %></td>
+                </tr>    
+            <% end %>
+        </tbody>
+    </table>
+</div>
