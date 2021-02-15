@@ -3,7 +3,7 @@
 
 Sinatra application for keeping track of all the free online courses that you are currently taking or are interested in taking.
 
-<p align="center"><img src="demo.gif" width="500"/></p>
+<p align="center"><img src="demo.gif" width="900"/></p>
 
 ## Installation
 
