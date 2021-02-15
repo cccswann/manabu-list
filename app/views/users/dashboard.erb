@@ -2,19 +2,101 @@
 <div class="grid-container">
     <div class="dash-intro">
         <h2><%= current_user.first_name %>'s Dashboard</h2>
-        <hr class="solid">
     </div>
     <div class="left progress-container">
         <h3> Your Progress</h3>
-        <div class="progress-group">
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="max-width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                    <span class="title">25%</span>
-                </div>
-            </div>
-        </div>
+        <hr class="solid">
+        <table class="progress-table">
+            <tbody>
+                <% Course.all.take(9).each do |a|%>
+                    <% if a.total_lectures != nil %>
+                        <tr>
+                            <td><%= a.course_name%> </td>
+                            <% if a.total_lectures != nil %>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="max-width: <%= percent_complete(a.completed_lectures, a.total_lectures)%>%;" aria-valuenow="<%= percent_complete(a.completed_lectures, a.total_lectures)%>" aria-valuemin="0" aria-valuemax="100">
+                                            <%if percent_complete(a.completed_lectures, a.total_lectures) == 100 %>
+                                                <span>Complete!</span>
+                                            <% else %>
+                                                <span class="title"></span>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                </td>
+                            <% end %>
+                        </tr>
+                    <% end %>
+                <% end %>
+            </tbody>
+        </table>
+        <a href="/courses" class="more">More 	&#10132;</a>
     </div>
     <div class="status-container">
-        <h3>Courses</h3>
+        <h3>Add a New Course</h3>
+        <form class="form-add" action="/course" method="POST">
+            <div class="status-row">
+                <div class="row-1">
+                    <input class="input-box field-style field-split align-left" type="text" name="course_name" id="name" placeholder="Course Name" required>
+                </div>
+                <div class="row-2">    
+                    <input class="input-box field-style field-split align-right" type="text" name="subject" id="subject" placeholder="Subject" required><br>
+                </div>    
+            </div>
+            <div class="status-row">
+                <div class="row-3">
+                    <input class="input-box field-style field-split align-left" type="number" min="0" oninput="this.value = 
+                        !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" name="completed_lectures" id="completed_lectures" placeholder="# of Completed Lectures" required>
+                </div>
+                <div class="row-4">
+                        <input class="input-box field-style field-split align-right" type="number" min="0" oninput="this.value = 
+                        !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" name="total_lectures" id="total_lectures" placeholder="# of Total Lectures" required>
+                </div>
+                <div class="row-5">
+                    <div class="select" >
+                    <label for="select">Status:</label>
+                    <select name="status" class="form-control" required>
+                        <option value="Ongoing">Ongoing</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Dropped">Dropped</option>
+                        <option value="On Hold">On Hold</option>
+                    </select>
+                    </div>
+                </div>
+            </div>
+            <input class="btn course-btn" type="submit" value="Save Course">
+        </form>
+    </div>
+    <div class="update-container">
+        <h3>Edit Your Courses</h3>
+        <br>
+        <form class="form-stretch" action="/course" method="POST" id="update-links-form">
+            <input type="hidden" name="_method" value="patch">
+                <% Course.all.take(4).each_with_index do |course, index| %>
+                    <div class="edit-row">
+                        <div class="row-item-counter">
+                        <p><%= index + 1 %>.</p>
+                        </div>
+                        <div class="row-item-2">
+                            <input type="hidden" name="course[original_course][id][]" value="<%= course.id %>">
+                            <input class="input-box edit" type="text" id="<%= course.id %>" name="course[course_name][]" value="<%= course.course_name %>">
+                        </div>
+                        <div class="row-item-3"><input class="input-box edit" type="text" name="course[subject][]" value="<%= course.subject %>"></div>
+                        <div class="row-item-4"><input class="input-box edit" type="text" name="course[status][]" value="<%= course.status %>"></div>
+                        <div class="row-item-5"><input class="input-box edit" type="number" name="course[completed_lectures][]" value="<%= course.completed_lectures %>"></div>
+                        <div class="row-item-6"><input class="input-box edit" type="number" name="course[total_lectures][]" value="<%= course.total_lectures %>"></div>
+                        <div class="row-item-7">
+                            <div class="flex">
+                                <button class="flex btn delete-chk ">Delete<input class="checkbox" type="checkbox" name="course[check][]" value="<%= course.id %>"></button>
+                            </div> 
+                        </div>
+                        </div>
+                <% end %>
+        </form>
+        <br>
+        <div class="form-stretch">
+            <button class="btn course-btn" type="submit" form="update-links-form">Save Changes</button>
+        </div>
+        <a href="/courses/edit" class="more-edit">More 	&#10132;</a>
     </div>
 </div>
