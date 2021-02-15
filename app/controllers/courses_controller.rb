@@ -41,13 +41,14 @@ class CoursesController < ApplicationController
     end
 
     patch '/course' do
+        @user = current_user
         if logged_in?
             if params[:course][:course_name].find {|p| p.strip.empty?}
                 flash[:message] = "Input Cannot Be Blank"
                 redirect '/dashboard'
             else
                 params[:course][:original_course][:id].each_with_index do |id, index|
-                    if @course = Course.all.find(id)
+                    if @course = @user.courses.find(id)
                         unless @course.course_name == params[:course][:course_name][index]
                             @course.course_name = params[:course][:course_name][index].strip
                             @course.save
