@@ -8,7 +8,6 @@
                     <div class="row-item-counter">
                        <p><%= index + 1 %>.</p>
                     </div>
-                    <div class="row-item-1"><%= course.course_name %></a></div>
                     <div class="row-item-2">
                         <input type="hidden" name="course[original_course][id][]" value="<%= course.id %>">
                         <input class="input-box edit" type="text" id="<%= course.id %>" name="course[course_name][]" value="<%= course.course_name %>">
