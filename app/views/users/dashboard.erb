@@ -8,7 +8,7 @@
         <hr class="solid">
         <table class="progress-table">
             <tbody>
-                <% Course.all.take(9).each do |a|%>
+                <% current_user.courses.take(9).each do |a|%>
                     <% if a.total_lectures != nil %>
                         <tr>
                             <td><%= a.course_name%> </td>
@@ -60,6 +60,7 @@
                         <option value="Completed">Completed</option>
                         <option value="Dropped">Dropped</option>
                         <option value="On Hold">On Hold</option>
+                        <option value="Want to Take">Want to Take</option>
                     </select>
                     </div>
                 </div>
@@ -72,7 +73,7 @@
         <br>
         <form class="form-stretch" action="/course" method="POST" id="update-links-form">
             <input type="hidden" name="_method" value="patch">
-                <% Course.all.take(4).each_with_index do |course, index| %>
+                <% current_user.courses.take(4).each_with_index do |course, index| %>
                     <div class="edit-row">
                         <div class="row-item-counter">
                         <p><%= index + 1 %>.</p>
@@ -97,6 +98,6 @@
         <div class="form-stretch">
             <button class="btn course-btn" type="submit" form="update-links-form">Save Changes</button>
         </div>
-        <a href="/courses/edit" class="more-edit">More 	&#10132;</a>
+        <a href="/courses/edit" class="more-edit">Edit All 	&#10132;</a>
     </div>
 </div>
