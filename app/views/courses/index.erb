@@ -8,15 +8,27 @@
             <th>Status</th>
             <th>Completed Lectures</th>
             <th>Total Lectures</th>
+            <th>Progress</th>
         </thead>
         <tbody>
-            <% Course.all.each do |a|%>
+            <% current_user.courses.each do |a|%>
                 <tr>
                     <td><%= a.course_name %></td> 
                     <td><%= a.subject %></td> 
                     <td><%= a.status %></td> 
                     <td><%= a.completed_lectures %></td>
                     <td><%= a.total_lectures %></td>
+                    <td>
+                        <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="max-width: <%= percent_complete(a.completed_lectures, a.total_lectures)%>%;" aria-valuenow="<%= percent_complete(a.completed_lectures, a.total_lectures)%>" aria-valuemin="0" aria-valuemax="100">
+                            <%if percent_complete(a.completed_lectures, a.total_lectures) == 100 %>
+                                <span>Complete!</span>
+                            <% else %>
+                                <span class="title"></span>
+                            <% end %>
+                        </div>
+                        </div>
+                    </td>
                 </tr>    
             <% end %>
         </tbody>
