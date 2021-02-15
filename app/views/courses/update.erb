@@ -3,7 +3,7 @@
     <br>
     <form class="form-stretch" action="/course" method="POST" id="update-links-form">
         <input type="hidden" name="_method" value="patch">
-            <% Course.all.each_with_index do |course, index| %>
+            <% current_user.courses.each_with_index do |course, index| %>
                 <div class="edit-row">
                     <div class="row-item-counter">
                        <p><%= index + 1 %>.</p>
