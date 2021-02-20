@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
     get '/signup' do
         if logged_in?
-            erb :"/users/dashboard"
+            redirect '/dashboard'
         else
             erb :"/users/signup"
         end
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
         if user.valid?
             flash[:success] = "Successfully created account"
             session["user_id"] = user.id
-            redirect "/dashboard"
+            redirect '/dashboard'
         else
             flash[:error] = user.errors.full_messages.first
             redirect '/signup'
