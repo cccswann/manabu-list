@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
     get '/login' do
         if logged_in?
-            erb :"/users/dashboard"
+            redirect '/dashboard'
         else
             erb :"/sessions/login"
         end
@@ -16,13 +16,13 @@ class SessionsController < ApplicationController
             erb :"/users/dashboard"
         else
             flash[:error] = "Invalid credentials"
-            redirect "/login"
+            redirect '/login'
         end
     end
 
     get "/logout" do
         session.clear
-        redirect "/"
+        redirect '/'
     end
 
 
