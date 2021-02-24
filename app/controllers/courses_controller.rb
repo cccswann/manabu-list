@@ -9,17 +9,10 @@ class CoursesController < ApplicationController
         erb :"/courses/update"
     end
 
-    get '/course/:id' do
-        @course = Course.find(params["id"])
-        erb :"courses/show"
-    end
-
-    post '/course' do
+    post '/courses' do
         @user = current_user
         if logged_in?
-            @course = Course.new(params)
-            @course.save
-            @user.courses << @course
+            @user.courses.create(params)
             flash[:message] = "Saved"
             erb :"/users/dashboard"
         else
@@ -27,7 +20,7 @@ class CoursesController < ApplicationController
         end
     end
 
-    delete '/course/:id' do
+    delete '/courses/:id' do
         @user = current_user
         if logged_in? && @user.courses.find(params[:id])
             @course = Course.find(params[:id])
@@ -40,7 +33,7 @@ class CoursesController < ApplicationController
         end
     end
 
-    patch '/course' do
+    patch '/courses' do
         @user = current_user
         if logged_in?
             if params[:course][:course_name].find {|p| p.strip.empty?}
